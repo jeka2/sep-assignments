@@ -1,11 +1,18 @@
 require_relative 'node'
+include 'binary_search_tree_helper'
 
 class BinarySearchTree
 
   def initialize(root)
+    @root = root
   end
 
   def insert(root, node)
+    if node.rating <= root.rating 
+      @root = leftify(@root, node)
+    else
+      @root = rightify(@root, node)
+    end
   end
 
   # Recursive Depth First Search
