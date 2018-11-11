@@ -7,10 +7,10 @@ class OpenAddressing
   end
 
   def []=(key, value)
-    @value = value
     new_item = Node.new(key, value)
     new_index = index(key, @size)
     if @items[new_index] != nil
+      @items[new_index].next = next_open_index(index(key, @size))
       new_index = next_open_index(index(key, @size))
       @items[new_index] = new_item
     else 
@@ -20,7 +20,12 @@ class OpenAddressing
 
   def [](key)
     new_index = index(key, @size)
-    @items[new_index].value
+    if @items[new_index].next 
+      new_index = next_index_with_same_key(new_index, key)
+      @items[new_index].value
+    else
+      @items[new_index].value
+    end
   end
 
   # Returns a unique, deterministically reproducible index into an array
@@ -36,7 +41,7 @@ class OpenAddressing
 
   # Given an index, find the next open index in @items
   def next_open_index(index)
-      index.upto(@items.length - 1) do |indx|
+      (index + 1).upto(@items.length - 1) do |indx|
         if @items[indx] == nil
           return indx
         end
@@ -48,6 +53,14 @@ class OpenAddressing
       end
       resize
       return -1
+  end
+
+  def next_index_with_same_key(index, key)
+    if @items[@items[index].next].key == key 
+      return @items[index].next.to_i
+    else
+      return index
+    end
   end
 
   # Simple method to return the number of items in the hash
