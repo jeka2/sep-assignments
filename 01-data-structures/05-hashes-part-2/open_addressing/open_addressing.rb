@@ -21,7 +21,7 @@ class OpenAddressing
   def [](key)
     new_index = index(key, @size)
     if @items[new_index].next 
-      new_index = next_index_with_same_key(new_index, key)
+      new_index = key_index_validator(new_index, key)
       @items[new_index].value
     else
       @items[new_index].value
@@ -55,7 +55,7 @@ class OpenAddressing
       return -1
   end
 
-  def next_index_with_same_key(index, key)
+  def key_index_validator(index, key)
     if @items[@items[index].next].key == key 
       return @items[index].next.to_i
     else

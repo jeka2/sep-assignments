@@ -6,18 +6,18 @@ class LinkedList
 
   def initialize 
     @chain = []
-    @tail = @chain[-1]
-    @head = @chain[0]
   end
 
   # This method creates a new `Node` using `data`, and inserts it at the end of the list.
   def add_to_tail(node)
     @chain << node
+    @tail = @chain.last
   end
 
   # This method removes the last node in the lists and must keep the rest of the list intact.
   def remove_tail
     @chain.pop
+    @tail = @chain.last
   end
 
   # This method prints out a representation of the list.
@@ -28,6 +28,8 @@ class LinkedList
   # This method removes `node` from the list and must keep the rest of the list intact.
   def delete(node)
     @chain.delete(node)
+    @head = @chain[0]
+    @tail = @chain[-1]
   end
 
   # This method adds `node` to the front of the list and must set the list's head to `node`.
@@ -41,5 +43,13 @@ class LinkedList
     first = @chain.shift
     @head = chain[0]
     first
+  end
+
+  def chain
+    @chain
+  end
+
+  def link(index)
+    @chain[index]
   end
 end
