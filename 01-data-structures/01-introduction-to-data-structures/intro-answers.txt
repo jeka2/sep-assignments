@@ -1,0 +1,3 @@
+1. The first created data structure is designed to have it's data manipulated by methods inside the class. 
+For example, adding a person can be accomplished by calling the class
+name followed by a call to the method .join.
