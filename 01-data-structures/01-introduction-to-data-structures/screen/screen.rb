@@ -9,17 +9,17 @@ class Screen
   def initialize(width, height)
     @width = viable_demension(width)
     @height = viable_demension(height)
-    @matrix = Matrix.build(@width, @height) { |row, col| nil }
+    @array = Array.new(@width){ Array.new(@height, nil) }
   end
 
   # Insert a Pixel at x, y
   def insert(pixel, x, y)
     x, y = inbounds(x, y)
-    @matrix[x, y] = pixel
+    @array[x][y] = pixel
   end
 
   def at(x, y)
-    @matrix[x, y]
+    @array[x][y]
   end
 
   private

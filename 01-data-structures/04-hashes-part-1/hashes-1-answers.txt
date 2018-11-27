@@ -1,0 +1,3 @@
+2. Doubling the size of the underlying array is a bad strategy because not only is there more potential
+for unnecessary memory allocation, ergo, slower performance, but also because of the possibility of 
+further fragmentation.
